@@ -1,4 +1,4 @@
-const OAuth2Strategy = require("passport-oauth2").Strategy;
+const OAuth2Strategy = require("./profile").Strategy;
 const User = require("@saltcorn/data/models/user");
 const Workflow = require("@saltcorn/data/models/workflow");
 const Form = require("@saltcorn/data/models/form");
@@ -13,6 +13,9 @@ const authentication = (config) => {
     callbackURL: `${addSlash(cfg_base_url)}auth/callback/oauth2`,
     authorizationURL: config.authorizationURL || "noauthurl",
     tokenURL: config.tokenURL || "notokenurl",
+    profileURL: config.profileURL,
+    profileTokenHeader: config.profileTokenHeader || "Authorization",
+    profileTokenFormat: config.profileTokenFormat || "Bearer {accessToken}"
   };
   return {
     oauth2: {
@@ -92,6 +95,24 @@ const configuration_workflow = () => {
                 label: "Token URL",
                 type: "String",
                 required: true,
+              },
+              {
+                name: "profileURL",
+                label: "Profile URL",
+                type: "String",
+                required: false,
+              },
+              {
+                name: "profileTokenHeader",
+                label: "Profile Token Header",
+                type: "String",
+                required: false,
+              },
+              {
+                name: "profileTokenFormat",
+                label: "Profile Token Format",
+                type: "String",
+                required: false,
               },
               {
                 name: "scope",
