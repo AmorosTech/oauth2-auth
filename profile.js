@@ -37,8 +37,8 @@ util.inherits(Strategy, OAuth2Strategy);
  */
 Strategy.prototype.userProfile = function(accessToken, done) {
   if(this._profileURL){
-    var headers = {this._profileTokenHeader: this._profileTokenFormat.format({"accessToken": accessToken})};
-
+    var headers = {};
+    headers[this._profileTokenHeader] = this._profileTokenFormat.format({"accessToken": accessToken});
     this._oauth2._request('GET', this._userProfileURL, headers, "", accessToken, function (err, body, res) {
       var json;
       
