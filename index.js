@@ -1,4 +1,4 @@
-const OAuth2Strategy = require("./profile").Strategy;
+const OAuth2Strategy = require("./profile");
 const User = require("@saltcorn/data/models/user");
 const Workflow = require("@saltcorn/data/models/workflow");
 const Form = require("@saltcorn/data/models/form");
@@ -15,7 +15,7 @@ const authentication = (config) => {
     tokenURL: config.tokenURL || "notokenurl",
     profileURL: config.profileURL,
     profileTokenHeader: config.profileTokenHeader || "Authorization",
-    profileTokenFormat: config.profileTokenFormat || "Bearer {accessToken}"
+    profileTokenFormat: config.profileTokenFormat || "Bearer {accessToken}",
   };
   return {
     oauth2: {
